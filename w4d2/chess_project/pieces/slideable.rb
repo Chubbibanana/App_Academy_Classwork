@@ -1,16 +1,17 @@
+require 'byebug'
 module Slideable
 
     private 
     LATERAL_DIRS = [
         [-1,0],
         [1,0],
-        [0,1]
+        [0,1],
         [0,-1]
     ]  
     DIAGONAL_DIRS = [
-        [-1, -1]
-        [1, 1]
-        [-1, 1]
+        [-1, -1],
+        [1, 1],
+        [-1, 1],
         [1, -1]
     ]
 
@@ -30,6 +31,7 @@ module Slideable
             x, y = partial_dir 
             moves.concat(grow_unblocked_moves_in_dir(x, y))
         end
+        # debugger
         moves
     end
 
@@ -41,11 +43,14 @@ module Slideable
     def grow_unblocked_moves_in_dir(dx, dy)
         x, y = self.position
         new_pos = [x + dx, y + dy]
+        debugger
         moves = []
         while valid_moves.include?(new_pos)
             moves << new_pos
-            new_pos[0] += dx
-            new_pos[1] += dy
+            # new_pos[0] += dx
+            # new_pos[1] += dy
+            x1, y1 = new_pos
+            new_pos =[x1 + dx, y1 + dy]
         end
         moves
     end

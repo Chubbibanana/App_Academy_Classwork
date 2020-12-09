@@ -1,3 +1,6 @@
+require_relative "piece"
+require_relative "stepable"
+
 class Knight < Piece
 
     MOVES = [
@@ -13,6 +16,10 @@ class Knight < Piece
 
     def symbol
         '♘'.colorize(self.color)
+    end
+
+    def inspect
+        symbol
     end
 
     protected
