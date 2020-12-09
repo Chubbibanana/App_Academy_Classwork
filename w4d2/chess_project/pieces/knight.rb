@@ -11,9 +11,13 @@ class Knight < Piece
         [ 2,  1]
     ]
 
-    protected
-    def move_dirs
+    def symbol
+        '♘'.colorize(self.color)
+    end
 
+    protected
+    def move_diffs
+        MOVES
     end
 
 end
