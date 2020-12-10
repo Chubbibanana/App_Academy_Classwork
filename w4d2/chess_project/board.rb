@@ -64,6 +64,13 @@ class Board
         @rows[y2][x2] = current_piece
     end
 
+    def valid_pos?(pos)
+        x, y = pos
+        return false if x < 0 || x > 7 || y < 0 || y > 7
+        true
+    end
+
+
 
 end
 
