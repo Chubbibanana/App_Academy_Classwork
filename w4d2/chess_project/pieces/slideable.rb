@@ -50,7 +50,10 @@ module Slideable
             # new_pos[0] += dx
             # new_pos[1] += dy
             x1, y1 = new_pos
+            col = board.rows[x1][y1].color
+            break if col != nil && col != self.color 
             new_pos =[x1 + dx, y1 + dy]
+            
         end
         moves
     end
