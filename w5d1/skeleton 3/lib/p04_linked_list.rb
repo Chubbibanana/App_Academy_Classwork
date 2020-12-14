@@ -1,3 +1,5 @@
+require 'byebug'
+
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -40,9 +42,9 @@ class LinkedList
     @tail.prev
   end
 
-  # def empty? # must do #append 1st
-  #   @head.next == @tail && @tail.prev == @head
-  # end
+  def empty? # must do #append 1st
+    @head.next == @tail && @tail.prev == @head
+  end
 
   def get(key)
   end
@@ -51,7 +53,12 @@ class LinkedList
   end
 
   def append(key, val)
-    
+    node = Node.new(key, val)
+    node.prev = last
+    @tail.prev.next = node # set last next to node
+    @tail.prev = node
+    node.next = @tail
+
   end
 
   def update(key, val)
@@ -60,7 +67,14 @@ class LinkedList
   def remove(key)
   end
 
-  def each
+  def each(&prc)
+    prc ||= Proc.new {|node| node}
+    current_node = @head.next
+    # debugger
+    while current_node != @tail
+      prc.call(current_node)
+      current_node = current_node.next
+    end
   end
 
   # uncomment when you have `each` working and `Enumerable` included
