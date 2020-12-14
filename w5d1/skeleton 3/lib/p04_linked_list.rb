@@ -1,5 +1,6 @@
 require 'byebug'
 
+
 class Node
   attr_reader :key
   attr_accessor :val, :next, :prev
@@ -24,6 +25,7 @@ class Node
 end
 
 class LinkedList
+  include Enumerable
   def initialize
     @head = Node.new
     @tail = Node.new
@@ -57,7 +59,10 @@ class LinkedList
   end
 
   def include?(key)
-    
+    self.each do |node|
+      return true if node.key == key
+    end
+    false
   end
 
   def append(key, val)
@@ -96,8 +101,18 @@ class LinkedList
     end
   end
 
+  def [](index)
+    idx_count = 0
+    self.each do |node|
+      return node if idx_count == index
+      idx_count += 1
+    end
+    nil
+  end
   # uncomment when you have `each` working and `Enumerable` included
-  # def to_s
-  #   inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
-  # end
+
+  
+  def to_s
+    inject([]) { |acc, link| acc << "[#{link.key}, #{link.val}]" }.join(", ")
+  end
 end
