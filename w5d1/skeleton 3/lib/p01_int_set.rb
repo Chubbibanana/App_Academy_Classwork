@@ -74,6 +74,10 @@ class ResizingIntSet
   end
 
   def remove(num)
+    if self[num].include?(num)
+      @count -= 1
+      self[num].delete(num)
+    end
   end
 
   def include?(num)
@@ -92,10 +96,9 @@ class ResizingIntSet
   end
 
   def resize!
-    # debugger
     current_store = @store.flatten
     @store = Array.new(@store.length * 2) {Array.new}
-    current_store.each {|num| self[num].push[num]}
+    current_store.each { |num| self[num].push(num) }
   end
 end
 
