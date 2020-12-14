@@ -69,6 +69,7 @@ class ResizingIntSet
     unless self[num].include?(num)
       self[num].push(num)
       @count += 1
+      resize! if @count > num_buckets
     end
   end
 
@@ -93,13 +94,8 @@ class ResizingIntSet
   def resize!
     # debugger
     current_store = @store.flatten
-    @count = 0
     @store = Array.new(@store.length * 2) {Array.new}
-    current_store.each do |num|
-      self[num].push(num)
-      @count += 1 # => number of elements we pushed
-    end
-    
+    current_store.each {|num| self[num].push[num]}
   end
 end
 
