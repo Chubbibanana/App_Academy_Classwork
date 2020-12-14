@@ -18,6 +18,8 @@ class Node
   def remove
     # optional but useful, connects previous link to next link
     # and removes self from list.
+    @prev.next = @next
+    @next.prev = @prev
   end
 end
 
@@ -47,9 +49,15 @@ class LinkedList
   end
 
   def get(key)
+    self.each do |node|
+      return node.val if node.key == key
+    end
+
+    nil
   end
 
   def include?(key)
+    
   end
 
   def append(key, val)
@@ -62,15 +70,26 @@ class LinkedList
   end
 
   def update(key, val)
+    self.each do |node|
+      if node.key == key
+        node.val = val
+        break
+      end
+    end
   end
 
   def remove(key)
+    self.each do |node|
+      if node.key == key
+        node.remove
+        break
+      end
+    end
   end
 
   def each(&prc)
     prc ||= Proc.new {|node| node}
     current_node = @head.next
-    # debugger
     while current_node != @tail
       prc.call(current_node)
       current_node = current_node.next
