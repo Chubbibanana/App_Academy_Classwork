@@ -1,3 +1,4 @@
+require 'byebug'
 class MaxIntSet
   attr_reader :store
   def initialize(max)
@@ -65,12 +66,17 @@ class ResizingIntSet
   end
 
   def insert(num)
+    unless self[num].include?(num)
+      self[num].push(num)
+      @count += 1
+    end
   end
 
   def remove(num)
   end
 
   def include?(num)
+    self[num].include?(num)
   end
 
   private
@@ -85,5 +91,17 @@ class ResizingIntSet
   end
 
   def resize!
+    # debugger
+    current_store = @store.flatten
+    @count = 0
+    @store = Array.new(@store.length * 2) {Array.new}
+    current_store.each do |num|
+      self[num].push(num)
+      @count += 1 # => number of elements we pushed
+    end
+    
   end
 end
+
+# set = ResizingIntSet.new(20)
+# elements = [*10..30]
