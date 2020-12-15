@@ -66,7 +66,6 @@ class HashMap
   end
 
   def each(&prc)
-    prc ||= Proc.new {|k, v| v}
     @store.each do |linked_list|
       linked_list.each do |node|
         prc.call(node.key, node.val)
@@ -98,14 +97,21 @@ class HashMap
       end
     end
     @store = Array.new(@store.length * 2) {LinkedList.new}
-    hash.keys.each do |key|
-      resize_set(key, hash[key])
-    end
-  end
 
-  def resize_set(key, val)
-    index = bucket(key)
-    @store[index].append(key, val)
+    hash.keys.each do |key|
+      index = bucket(key)
+      @store[index].append(key, hash[key])
+    end
+
+
+    # old_store = @store
+    # @store = Array.new(@store.length * 2) {LinkedList.new}
+    # @count = 0
+    # old_store.each do |linked_list|
+    #   linked_list.each do |node|
+    #     set(node.key, node.val)
+    #   end
+    # end
   end
 
   def bucket(key)
