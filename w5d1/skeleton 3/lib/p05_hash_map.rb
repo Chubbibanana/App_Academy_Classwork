@@ -9,6 +9,8 @@ class HashMap
   end
 
   def include?(key)
+    index = bucket(key)
+    @store[index].include?(key)
   end
 
   def set(key, val)
@@ -17,7 +19,10 @@ class HashMap
       @store[index].update(key, val)
     else
       @store[index].append(key, val)
-      count += 1
+      @count += 1
+      if @count > num_buckets
+        resize!
+      end
     end
   end
 
@@ -32,16 +37,20 @@ class HashMap
 
   def delete(key)
     index = bucket(key)
-    @store[index].remove(key)
+    if include?(key)
+      @store[index].remove(key)
+      @count -= 1
+    end
   end
 
+  # only used to update in resize
+  # doesn't increment count
   def []=(key, val)
     index = bucket(key)
     if @store[index].include?(key)
       @store[index].update(key, val)
     else
       @store[index].append(key, val)
-      count += 1
     end
   end
 
@@ -55,8 +64,11 @@ class HashMap
   end
 
   def each(&prc)
+    prc ||= Proc.new {|k, v| v}
     @store.each do |linked_list|
-      prc.call(linked_list)
+      linked_list.each do |node|
+        prc.call(node.key, node.val)
+      end
     end
   end
 
@@ -78,7 +90,37 @@ class HashMap
   end
 
   def resize!
+    hash = {}
+    @store.each do |linked_list|
+      linked_list.each do |node|
+        hash[node.key] = node.val
+      end
+    end
+    @store = Array.new(@store.length * 2) {LinkedList.new}
+    hash.keys.each do |key|
+      set(key, hash[key])
+      @count -= 1
+    end
   end
+
+
+# def resize!
+#     hash = {}
+#     @store.each do |linked_list|
+#       linked_list.each do |node|
+#         hash[node.key] = node.val
+#       end
+#     end
+#     @store = Array.new(@store.length * 2) {LinkedList.new}
+#     hash.keys.each do |key|
+#       set(key, hash[key])
+#       @count -= 1
+#     end
+#   end
+
+
+
+
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`

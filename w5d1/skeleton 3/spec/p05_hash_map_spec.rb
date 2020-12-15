@@ -1,6 +1,6 @@
 require 'rspec'
 require 'p05_hash_map'
-
+require 'byebug'
 describe HashMap do
   let(:hash) do
     hash = HashMap.new
