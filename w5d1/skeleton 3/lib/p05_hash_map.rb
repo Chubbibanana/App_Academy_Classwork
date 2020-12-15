@@ -26,6 +26,8 @@ class HashMap
     end
   end
 
+  
+
   def get(key)
     index = bucket(key)
     if @store[index].include?(key)
@@ -72,13 +74,12 @@ class HashMap
     end
   end
 
-  # uncomment when you have Enumerable included
-  # def to_s
-  #   pairs = inject([]) do |strs, (k, v)|
-  #     strs << "#{k.to_s} => #{v.to_s}"
-  #   end
-  #   "{\n" + pairs.join(",\n") + "\n}"
-  # end
+  def to_s
+    pairs = inject([]) do |strs, (k, v)|
+      strs << "#{k.to_s} => #{v.to_s}"
+    end
+    "{\n" + pairs.join(",\n") + "\n}"
+  end
 
   alias_method :[], :get
   alias_method :[]=, :set
@@ -98,29 +99,14 @@ class HashMap
     end
     @store = Array.new(@store.length * 2) {LinkedList.new}
     hash.keys.each do |key|
-      set(key, hash[key])
-      @count -= 1
+      resize_set(key, hash[key])
     end
   end
 
-
-# def resize!
-#     hash = {}
-#     @store.each do |linked_list|
-#       linked_list.each do |node|
-#         hash[node.key] = node.val
-#       end
-#     end
-#     @store = Array.new(@store.length * 2) {LinkedList.new}
-#     hash.keys.each do |key|
-#       set(key, hash[key])
-#       @count -= 1
-#     end
-#   end
-
-
-
-
+  def resize_set(key, val)
+    index = bucket(key)
+    @store[index].append(key, val)
+  end
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`
