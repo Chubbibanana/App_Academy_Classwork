@@ -18,7 +18,7 @@ def harrison_ford
   #   .where(movies: { title: 'Blade Runner' })
   #
   # It's possible to join based on active record relations defined in models.
-  #
+  # Since actors goes through castings, just join actors
   # Find the id and title of all movies in which Harrison Ford
   # appeared but not as a lead actor
   Movie
