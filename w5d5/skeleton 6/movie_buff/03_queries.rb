@@ -68,12 +68,12 @@ def longest_career
     .limit(3)
 end
 
-def matcher_method(whazzername)
-  names = Actor.pluck(:name) # gives us our names 
-  matched_name = nil
-  names.each do |name|
-    name_arr = name.split("")
-    matcher = name_arr.select {|char| whazzername.include?(char)}.join('')
-    matched_name = name if whazzername.downcase == matcher.downcase
-  end
-end
+# def matcher_method(whazzername)
+#   names = Actor.pluck(:name) # gives us our names 
+#   matched_name = nil
+#   names.each do |name|
+#     name_arr = name.split("")
+#     matcher = name_arr.select {|char| whazzername.include?(char)}.join('')
+#     matched_name = name if whazzername.downcase == matcher.downcase
+#   end
+# end
