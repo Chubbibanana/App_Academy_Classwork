@@ -1,4 +1,6 @@
 class CatsController < ApplicationController
+  before_action :require_logged_in, only: [:edit, :destroy, :update]
+
   def index
     @cats = Cat.all
     render :index
@@ -16,6 +18,8 @@ class CatsController < ApplicationController
 
   def create
     @cat = Cat.new(cat_params)
+    @cat.user_id = current_user.id
+    @cat.owner
     if @cat.save
       redirect_to cat_url(@cat)
     else
@@ -26,17 +30,20 @@ class CatsController < ApplicationController
 
   def edit
     @cat = Cat.find(params[:id])
+    if @cat
     render :edit
+
   end
 
   def update
     @cat = Cat.find(params[:id])
     if @cat.update_attributes(cat_params)
-      redirect_to cat_url(@cat)
+        redirect_to cat_url(@cat)
     else
-      flash.now[:errors] = @cat.errors.full_messages
-      render :edit
+        flash.now[:errors] = @cat.errors.full_messages
+        render :edit
     end
+
   end
 
   private

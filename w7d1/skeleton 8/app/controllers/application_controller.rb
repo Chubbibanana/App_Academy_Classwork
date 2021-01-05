@@ -15,4 +15,8 @@ class ApplicationController < ActionController::Base
       #the ! changes the ruby object into a boolean value
       #!! will change it back into its truthy/falsey value
     end
+
+    def require_logged_in
+      redirect_to new_session_url unless logged_in?
+    end
 end
