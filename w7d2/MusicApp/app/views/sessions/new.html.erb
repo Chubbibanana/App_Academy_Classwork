@@ -1,6 +1,6 @@
-<h1>Sign Up</h1>
+<h1>Sign In</h1>
 
-<form action="<%=users_url%>" method="POST">
+<form action="<%=session_url%>" method="POST">
     <label>Email: 
         <input type="text" name="user[email]" value="<%= @user.email %>" />
     </label>
@@ -13,5 +13,5 @@
 
     <br>
 
-    <input type="submit" value="Sign Up!">
+    <input type="submit" value="Sign In!">
 </form>
