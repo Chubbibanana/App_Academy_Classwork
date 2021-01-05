@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+ body > h1 {
+     font-family: Papyrus, fantasy;
+     color: orangered;
+  
+ }
+ .content {
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .

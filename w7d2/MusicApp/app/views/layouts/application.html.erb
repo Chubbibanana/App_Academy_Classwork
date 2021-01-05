@@ -10,6 +10,8 @@
   </head>
 
   <body>
+    <div class= 'content'>
+    <h1>Music App</h1>
     <% if logged_in? %>
       <h2>Welcome, user :) %></h2>
       <form action=<%=session_url%> method="POST">
@@ -20,6 +22,7 @@
       <a href=<%= new_user_url %>>Sign Up!</a>
       <a href=<%= new_session_url %>>Sign In!</a>
     <% end %>
+    </div>
     <%= yield %>
     <% if flash[:errors] %>
       <% flash[:errors].each do |error| %>
