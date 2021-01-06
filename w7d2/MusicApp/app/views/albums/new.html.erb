@@ -6,12 +6,19 @@
         <input type="text" name="album[name]" value="">
     </label>
     <br>
-    <label>Band name:
-        <input type="text" name="album[name]" value="">
+    <label for="band">
+        <select name="album[band_id]" id="band">
+            <% Band.all.each do |band|%>
+                <option> 
+                <%= "selected" if album.band_id == band.id %>
+                value="<%=band.name%>">
+                </option>
+            <% end %>
+        </select>     
     </label>
     <br>
-    <label>Album Name:
-        <input type="text" name="album[name]" value="">
+    <label>Live:
+        <input type="radio" id="" name="album[name]" value="">
     </label>
     <br>
     <label>Album Name:
