@@ -11,7 +11,8 @@
 #  updated_at :datetime         not null
 #
 class Album < ApplicationRecord
-    validates :name 
+    validates :name, :band_id, :year, :live, presence: true
+    valideates :name, uniqueness: { scope: :band_id} 
 
     belongs_to :band,
         foreign_key: :band_id,
