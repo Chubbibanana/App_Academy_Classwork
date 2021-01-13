@@ -26,4 +26,29 @@ Array.prototype.myMap = function (myfunc) {
 console.log([1, 2, 3, 4].myMap(num => num * 2 ));
 
 
-// Array#myInject monkey-patch
+// Array#myReduce monkey-patch
+
+Array.prototype.myReduce = function (myfunc, initVal) {
+
+    let arr = this;
+    if (initVal === undefined) {
+        initVal = arr[0];
+        arr.shift();
+    }
+
+    let result = initVal;
+
+    arr.myEach(el => result = myfunc(result, el));
+
+    return result;
+
+};
+
+console.log([1, 2, 3].myReduce((acc, el) => acc + el));
+
+
+
+
+
+
+  
