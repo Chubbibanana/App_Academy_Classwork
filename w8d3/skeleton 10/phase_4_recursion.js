@@ -25,3 +25,31 @@ function sumRec(arr) {
 }
 
 console.log(sumRec([1, 2, 3]));
+
+
+//exp1
+
+function exp1(base, exp) {
+    return exp === 0 ? 1 : (base * exp1(base, exp - 1));
+}
+
+
+//exp2
+
+function exp2(base, exp) {
+    if (exp === 0){
+        return 1;
+    }
+
+    if (exp % 2 === 0) {
+        let root = exp2(base, exp / 2);
+        return root ** 2;
+    } else {
+        let root = exp2(base, ((exp-1)/2));
+        return base * (root ** 2);
+    }
+}
+
+console.log(exp1(2, 3));
+
+console.log(exp2(2, 3));
