@@ -53,3 +53,19 @@ function exp2(base, exp) {
 console.log(exp1(2, 3));
 
 console.log(exp2(2, 3));
+
+//fibonacci
+
+function fib(n) {
+    if (n < 3) {
+        return [0, 1].slice(0, n);
+    }
+
+    let fibNums = fib(n - 1);
+    fibNums.push(fibNums[fibNums.length - 1] + fibNums[fibNums.length - 2]);
+
+    return fibNums;
+}
+
+console.log(fib(5));
+console.log(fib(10));
