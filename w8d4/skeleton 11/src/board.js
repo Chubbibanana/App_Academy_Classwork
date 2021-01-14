@@ -11,12 +11,15 @@ if (typeof window === 'undefined'){
 function _makeGrid () {
   const grid = []
   for (let i = 0; i < 8; i++) {
-    grid.push([]);
-    // grid.push(new Array(8));
-    for (let j = 0; j < 8; j++) {
-    grid[i][j] = null;}
-    
+    grid.push(new Array(8));
+    // grid.push([]);
+    // for (let j = 0; j < 8; j++) {
+    // grid[i][j] = null ;}
   }
+  grid[3][3] = new Piece("white");
+  grid[3][4] = new Piece("black");
+  grid[4][3] = new Piece("black");
+  grid[4][4] = new Piece("white");
 
   return grid;
 }
@@ -38,6 +41,7 @@ Board.DIRS = [
  * Checks if a given position is on the Board.
  */
 Board.prototype.isValidPos = function (pos) {
+  return (pos[0] >= 0 && pos[0] < 8) && (pos[1] >= 0 && pos[1] < 8);
 };
 
 /**
@@ -45,6 +49,10 @@ Board.prototype.isValidPos = function (pos) {
  * throwing an Error if the position is invalid.
  */
 Board.prototype.getPiece = function (pos) {
+  if (!this.isValidPos(pos)) {
+    throw new Error("Not valid pos!");
+  }
+  return this.grid[pos[0]][pos[1]];
 };
 
 /**
@@ -52,12 +60,15 @@ Board.prototype.getPiece = function (pos) {
  * matches a given color.
  */
 Board.prototype.isMine = function (pos, color) {
+  const piece = this.getPiece(pos);
+  return piece && piece.color === color;
 };
 
 /**
  * Checks if a given position has a piece on it.
  */
 Board.prototype.isOccupied = function (pos) {
+  return !!this.getPiece(pos);
 };
 
 /**
@@ -74,6 +85,21 @@ Board.prototype.isOccupied = function (pos) {
  * Returns empty array if no pieces of the opposite color are found.
  */
 Board.prototype._positionsToFlip = function(pos, color, dir, piecesToFlip){
+  if (!piecesToFlip) {
+    piecesToFlip = [];
+  }else{
+    piecesToFlip.push(pos)
+  }
+  let nextPosition = [pos[0] + dir[0], pos[1] + dir[1]];
+  if (!this.isValidPos(nextPosition)){
+    return [];
+  }else if (!this.isOccupied(nextPosition)) {
+    return [];
+  }else if (this.isMine(nextPosition, color)){
+    return (piecesToFlip.length === 0) ? [] : piecesToFlip;
+  }else{
+    return this._positionsToFlip(nextPosition, color, dir, piecesToFlip);
+  }
 };
 
 /**
