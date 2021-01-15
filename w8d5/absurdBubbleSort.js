@@ -43,8 +43,24 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
 
 }
 
-innerBubbleSortLoop([5,6,2,5,1,4], 0, false,  (madeAnySwaps) => {
+// innerBubbleSortLoop([5,6,2,5,1,4], 0, false,  (madeAnySwaps) => {
 
-    console.log('In outer loop');
+//     console.log('In outer loop');
+//     reader.close();
+// });
+
+function absurdBubbleSort(arr,sortCompletionCallBack) {
+    function outerBubbleSortLoop(madeAnySwaps) {
+        if (madeAnySwaps) {
+            innerBubbleSortLoop(arr, 0, false, outerBubbleSortLoop);
+        } else {
+            sortCompletionCallBack(arr);
+        }
+    }
+    outerBubbleSortLoop(true);
+}
+
+absurdBubbleSort([3, 2, 1], function (arr) {
+    console.log("Sorted array: " + JSON.stringify(arr));
     reader.close();
 });
