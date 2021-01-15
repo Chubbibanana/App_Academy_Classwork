@@ -26,8 +26,23 @@ class Clock {
         // 1. Increment the time by one second.
         // 2. Call printTime.
         this.seconds += 1;
+
+        if (this.seconds === 60) {
+            this.seconds = 0; 
+            this.minutes += 1;
+            if (this.minutes === 60) {
+                this.minutes = 0;
+                this.hours += 1;
+                this.hours = this.hours % 24;
+            }
+        }
+
+
         this.printTime();
     }
+
+
 }
 
 const clock = new Clock();
+
