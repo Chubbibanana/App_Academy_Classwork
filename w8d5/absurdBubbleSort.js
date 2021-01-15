@@ -26,11 +26,16 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
                 arr[i + 1] = temp;
                 madeAnySwaps = true;
             }
+            innerBubbleSortLoop(
+                arr, i + 1, madeAnySwaps, outerBubbleSortLoop
+            );
+            // has to be here because reader.question is asynchronous
         });
+        // innerBubbleSortLoop(
+        //     arr, i + 1, madeAnySwaps, outerBubbleSortLoop
+        // );
+        // can't be here because reader.question is asynchronous
         // console.log(i);
-        innerBubbleSortLoop(
-            arr, i + 1, madeAnySwaps, outerBubbleSortLoop
-        );
     } else if (i === (arr.length - 1)) {
         outerBubbleSortLoop(madeAnySwaps);
         // reader.close();
@@ -38,6 +43,8 @@ function innerBubbleSortLoop(arr, i, madeAnySwaps, outerBubbleSortLoop) {
 
 }
 
-innerBubbleSortLoop([5,6,2,5,1,4], 0, false,  sorted => {
+innerBubbleSortLoop([5,6,2,5,1,4], 0, false,  (madeAnySwaps) => {
+
     console.log('In outer loop');
+    reader.close();
 });
