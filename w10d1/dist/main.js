@@ -15,7 +15,11 @@
   \************************************/
 /***/ ((module) => {
 
+<<<<<<< HEAD
 eval("class DOMNodeCollection {\n    constructor(HTMLElements) {\n        this.HTMLElements = HTMLElements;\n        return this;\n    }\n\n    html(txt) {\n        if (txt) {\n            this.HTMLElements.forEach(element => {\n            element.innerHTML = txt;\n        })} else {\n            return this.HTMLElements[0].innerHTML;\n        }\n    };\n\n    empty() {\n        this.html(' ');\n    };\n\n    append(inp) {\n        // debugger\n        if (typeof inp === 'string'){\n            this.HTMLElements.forEach(element => {\n                element.innerHTML += inp;\n            })\n        } else if (inp instanceof Array && inp.every(el => el instanceof HTMLElement)){\n            this.HTMLElements.forEach(element => {\n                inp.forEach(el => {\n                    element.innerHTML += el.outerHTML;\n                })\n            })\n        } else if (inp instanceof HTMLElement) {\n            this.HTMLElements.forEach(element => {\n                element.innerHTML += inp.outerHTML;\n            })\n        } else if (inp instanceof DOMNodeCollection) {\n            this.HTMLElements.forEach(element => {\n                inp.HTMLElements.forEach(el2 =>{\n                    element.innerHTML += el2.outerHTML;\n                })\n            })\n        }\n    };\n\n}\n\nmodule.exports = DOMNodeCollection;\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
+=======
+eval("class DOMNodeCollection {\n    constructor(HTMLElements) {\n        this.HTMLElements = HTMLElements;\n        return this;\n    }\n\n    html(txt) {\n        if (txt) {\n            this.HTMLElements.forEach(element => {\n            element.innerHTML = txt;\n        })} else {\n            return this.HTMLElements[0].innerHTML;\n        }\n    }\n\n    empty() {\n        this.html('');\n    }\n\n    append(outer) {\n        this.HTMLElements.forEach(element => {\n            this.html(outer);\n        })\n    }\n\n}\n\nmodule.exports = DOMNodeCollection;\n\n//# sourceURL=webpack:///./src/dom_node_collection.js?");
+>>>>>>> 1ee710778c4f1ff69daff0400b6f3664386ace2c
 
 /***/ })
 

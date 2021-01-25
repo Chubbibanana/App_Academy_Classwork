@@ -48,7 +48,7 @@ console.log([1, 2, 3].myReduce((acc, el) => acc + el));
 
 
 
-
+console.log([1, 2, 3].myReduce((acc, el) => acc + el, 5));
 
 
   
