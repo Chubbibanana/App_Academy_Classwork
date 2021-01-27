@@ -255,6 +255,15 @@ var Game = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "restartGame",
+    value: function restartGame() {
+      // debugger
+      var board = new _minesweeper__WEBPACK_IMPORTED_MODULE_2__["Board"](9, 9);
+      this.setState({
+        board: board
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var modal = this.renderModal();
@@ -283,14 +292,6 @@ var Game = /*#__PURE__*/function (_React$Component) {
           onClick: this.restartGame
         }, "Play Again!!!")));
       }
-    }
-  }, {
-    key: "restartGame",
-    value: function restartGame() {
-      var board = new _minesweeper__WEBPACK_IMPORTED_MODULE_2__["Board"](9, 9);
-      this.setState = {
-        board: board
-      };
     }
   }]);
 

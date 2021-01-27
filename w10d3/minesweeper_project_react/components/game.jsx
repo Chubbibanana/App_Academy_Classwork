@@ -24,6 +24,13 @@ class Game extends React.Component{
         this.setState({ board: this.state.board });
     }
 
+    restartGame() {
+        const board = new Minesweeper.Board(9, 9);
+        this.setState({
+            board: board
+        });
+    }
+
     render() {
         let modal = this.renderModal();
         return (
@@ -53,12 +60,7 @@ class Game extends React.Component{
         }
     }
 
-    restartGame() {
-        const board = new Minesweeper.Board(9, 9);
-        this.setState = {
-            board: board
-        };
-    }
+    
 }
 
 export default Game;
