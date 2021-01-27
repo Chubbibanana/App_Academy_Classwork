@@ -5,7 +5,7 @@ import * as Minesweeper from '../minesweeper';
 class Game extends React.Component{
     constructor(props) {
         super(props);
-        const board = new Minesweeper.Board(20, 40);
+        const board = new Minesweeper.Board(9, 9);
         this.state = {
             board: board
         };
@@ -25,3 +25,5 @@ class Game extends React.Component{
         )
     }
 }
+
+export default Game;
