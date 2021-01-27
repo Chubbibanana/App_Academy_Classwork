@@ -257,7 +257,6 @@ var Game = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "restartGame",
     value: function restartGame() {
-      // debugger
       var board = new _minesweeper__WEBPACK_IMPORTED_MODULE_2__["Board"](9, 9);
       this.setState({
         board: board
