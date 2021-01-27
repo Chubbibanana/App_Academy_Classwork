@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/10-posts.css" type="text/css">
   <link rel="stylesheet" href="css/11-icons.css" type="text/css">
   <link rel="stylesheet" href="css/12-modal.css" type="text/css">
+  <script src="../shared/js/jquery.js"></script>
+  
 </head>
 <body>
 
@@ -232,5 +234,26 @@
 
   </footer>
 
+  <div class="modal is-open">
+    <section class="modal-screen"></section>
+    <form class="modal-form"></form>
+    
+  </div>
+
+  <script>
+    $(function () {
+
+      $("body").on("click", ".js-modal-open", function (event) {
+        event.preventDefault();
+        $(".modal").addClass("is-open");
+      });
+
+      $("body").on("click", ".js-modal-close", function (event) {
+        event.preventDefault();
+        $(".modal").removeClass("is-open");
+      });
+
+    });
+  </script>
 </body>
 </html>
